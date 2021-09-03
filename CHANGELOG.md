@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Fix base64url invalid character decode error.
+- Do not decode too short tokens.
 
 ## [0.1.0] - 2021-09-03
 
