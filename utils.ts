@@ -73,26 +73,18 @@ export function constantTimeCompare(a: string, b: string) {
   }
 
   for (let i = 0, len = a.length; i < len; ++i) {
-    result |= (a.charCodeAt(i) ^ b.charCodeAt(i));
+    result |= a.charCodeAt(i) ^ b.charCodeAt(i);
   }
 
   return result === 0;
 }
 
-function encrypt(
-  key: Uint8Array,
-  iv: Uint8Array,
-  data: Uint8Array,
-): string {
+function encrypt(key: Uint8Array, iv: Uint8Array, data: Uint8Array): string {
   const cipher = new Cbc(Aes, key, iv, Padding.PKCS7);
   return uint2hex(cipher.encrypt(data));
 }
 
-function decrypt(
-  key: Uint8Array,
-  iv: Uint8Array,
-  data: Uint8Array,
-): string {
+function decrypt(key: Uint8Array, iv: Uint8Array, data: Uint8Array): string {
   const decipher = new Cbc(Aes, key, iv, Padding.PKCS7);
   return td.decode(decipher.decrypt(data));
 }
@@ -104,11 +96,5 @@ export function createHmac(
   key: Uint8Array,
   hexData: string,
 ): string {
-  return uint2hex(hmac(
-    hash,
-    key,
-    hex2uint(
-      hexData,
-    ),
-  ));
+  return uint2hex(hmac(hash, key, hex2uint(hexData)));
 }
