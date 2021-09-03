@@ -14,7 +14,7 @@ export const te = new TextEncoder();
 export function hex2urlsave(hex: string) {
   const conv = base64url.encode(hex2uint(hex));
 
-  return conv.padEnd(conv.length + 4 - (conv.length % 4), "=");
+  return conv.padEnd(conv.length + 4 - ((conv.length % 4) || 4), "=");
 }
 
 /** Convert a url save base64 to a hex. */
