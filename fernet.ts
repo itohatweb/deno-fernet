@@ -80,6 +80,9 @@ function decodeFernet(
   options?: { ttl?: number; maxClockSkew?: number; currentTime?: number },
 ) {
   const hexToken = urlsave2hex(token);
+  if (hexToken.length < 146) {
+    throw new Error("Invalid Token: To Short");
+  }
 
   const version = parseHex(hexToken.slice(0, VERSION_OFFSET));
 
