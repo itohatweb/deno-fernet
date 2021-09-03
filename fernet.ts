@@ -69,7 +69,7 @@ function convertSecret(
   };
 }
 
-function createSecret(size = 32) {
+export function createSecret(size = 32) {
   return hex2urlsave(uint2hex(crypto.getRandomValues(new Uint8Array(size))));
 }
 
