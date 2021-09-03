@@ -19,7 +19,7 @@ export function hex2urlsave(hex: string) {
 
 /** Convert a url save base64 to a hex. */
 export function urlsave2hex(urlsave: string) {
-  return uint2hex(base64url.decode(urlsave));
+  return uint2hex(base64url.decode(urlsave.replace(/=+$/, "")));
 }
 
 /** Convert a UNIX timestamp to the correct format for a fernet token. */
