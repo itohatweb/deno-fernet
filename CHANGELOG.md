@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- hex2urlsave padEnd calculation adding 4 "=" when it is a multiple of 4.
+
+## [0.1.1] - 2021-09-03
+
+### Fixed
+
 - Fix base64url invalid character decode error.
 - Do not decode too short tokens.
 
@@ -16,5 +22,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First release.
 
+[0.1.2]: https://github.com/itohatweb/deno-fernet/compare/0.1.1...0.1.2
 [0.1.1]: https://github.com/itohatweb/deno-fernet/compare/0.1.0...0.1.1
 [0.1.0]: https://github.com/itohatweb/deno-fernet/compare/516a0e07c77ae36f3e7a06b6f4bef8d4de77674c...0.1.0
