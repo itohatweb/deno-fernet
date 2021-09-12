@@ -84,9 +84,13 @@ function encrypt(key: Uint8Array, iv: Uint8Array, data: Uint8Array): string {
   return uint2hex(cipher.encrypt(data));
 }
 
-function decrypt(key: Uint8Array, iv: Uint8Array, data: Uint8Array): string {
+function decrypt(
+  key: Uint8Array,
+  iv: Uint8Array,
+  data: Uint8Array,
+): Uint8Array {
   const decipher = new Cbc(Aes, key, iv, Padding.PKCS7);
-  return td.decode(decipher.decrypt(data));
+  return decipher.decrypt(data);
 }
 
 export const aes = { encrypt, decrypt };
