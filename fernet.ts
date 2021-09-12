@@ -86,13 +86,11 @@ function decodeFernet(
   }
 
   const version = parseHex(hexToken.slice(0, VERSION_OFFSET));
-
   if (version !== 128) {
     throw new Error("Invalid version");
   }
 
   const timestamp = parseHex(hexToken.slice(VERSION_OFFSET, TIME_OFFSET));
-
   if (options?.ttl && options.ttl > 0) {
     const now = (options?.currentTime ?? Date.now()) / 1000;
 
