@@ -7,6 +7,7 @@ import {
   hex2urlsave,
   hexBits,
   parseHex,
+  td,
   te,
   timeBytes,
   uint2hex,
@@ -21,7 +22,7 @@ const HMAC_OFFSET = (tokenLength: number) => tokenLength - hexBits(256);
 function encodeFernet(
   signKey: Uint8Array,
   encryptionKey: Uint8Array,
-  msg: string,
+  data: Uint8Array,
   options?: { currentTime?: number; iv?: Uint8Array },
 ) {
   const version = (0x80).toString(16);
@@ -33,7 +34,7 @@ function encodeFernet(
   const ciphertext = aes.encrypt(
     encryptionKey,
     hex2uint(iv),
-    te.encode(msg),
+    data,
   );
 
   const hmac = createHmac(
@@ -144,7 +145,7 @@ export function createFernet(
     encryptionKeyUint: keys.encryptionKeyUint,
 
     encode(
-      data: string,
+      data: string | Uint8Array,
       options?: Omit<FernetOptions, "ttl" | "maxClockSkew">,
     ) {
       const keys = options?.secret ? convertSecret(options.secret) : undefined;
@@ -152,7 +153,7 @@ export function createFernet(
       return encodeFernet(
         keys?.signKeyUint ?? this.signKeyUint,
         keys?.encryptionKeyUint ?? this.encryptionKeyUint,
-        data,
+        typeof data === "string" ? te.encode(data) : data,
         {
           currentTime: options?.currentTime,
           iv: options?.iv,
